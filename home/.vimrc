@@ -103,8 +103,8 @@ nnoremap <leader>q gqip
 "Enable code folding
 set foldenable
 
-"Hide mouse when typing
-set mousehide
+"Enable Mouse
+set mouse=a
 
 "Shortcut to fold tags with leader (usually \) + ft
 nnoremap <leader>ft Vatzf

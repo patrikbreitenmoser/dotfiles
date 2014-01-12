@@ -6,46 +6,42 @@
 
 sudo -v # ask for password only at the beginning
 
-# dev="$HOME/dotfiles"
 homebin="$HOME/bin"
 
-# pushd .
-# mkdir -p $dev
 mkdir -p $homebin
 
 export PATH=~/bin:$PATH
 
-# cd $dev
 
 # echo 'Enter new hostname of the machine (e.g. todesstern)'
-#   read hostname
-#   echo "Setting new hostname to $hostname..."
-#   scutil --set HostName "$hostname"
-#   compname=$(sudo scutil --get HostName | tr '-' '.')
-#   echo "Setting computer name to $compname"
-#   scutil --set ComputerName "$compname"
-#   sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$compname"
+  read hostname
+  echo "Setting new hostname to $hostname..."
+  scutil --set HostName "$hostname"
+  compname=$(sudo scutil --get HostName | tr '-' '.')
+  echo "Setting computer name to $compname"
+  scutil --set ComputerName "$compname"
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$compname"
 
 # echo 'Enter Git Username'
-#   read git_username
-#   echo "Setting Git Username to $git_username"
-#   git config --global user.name "$git_username"
+  read git_username
+  echo "Setting Git Username to $git_username"
+  git config --global user.name "$git_username"
 
 # echo 'Enter Git Email'
-#   read git_email
-#   echo "Setting Git Username to $git_email"
-#   git config --global user.email "$git_email"
+  read git_email
+  echo "Setting Git Username to $git_email"
+  git config --global user.email "$git_email"
 
 
 
 
-# pub=$HOME/.ssh/id_rsa.pub
-# echo 'Checking for SSH key, generating one if it does not exist...'
-#   [[ -f $pub ]] || ssh-keygen -t rsa
+pub=$HOME/.ssh/id_rsa.pub
+echo 'Checking for SSH key, generating one if it does not exist...'
+  [[ -f $pub ]] || ssh-keygen -t rsa
 
 # echo 'Copying public key to clipboard. Paste it into your Github account...'
-#   [[ -f $pub ]] && cat $pub | pbcopy
-#   open 'https://github.com/account/ssh'
+  [[ -f $pub ]] && cat $pub | pbcopy
+  open 'https://github.com/account/ssh'
 
 # If we on OS X, install homebrew and tweak system a bit.
 if [[ `uname` == 'Darwin' ]]; then
@@ -63,29 +59,12 @@ if [[ `uname` == 'Darwin' ]]; then
   fi
 
   # echo 'Tweaking OS X...'
-  #   source 'install/osx.sh'
+    source 'install/osx.sh'
 
   echo 'Installing APPS - be patient'
     source 'install/cask.sh'
+
+  echo 'setting up homesick'
+    source 'install/homesick.sh'
 fi
-
-
-
-# echo 'Applying sublime config...'
-#   st=$(pwd)/sublime/packages
-#   as="$HOME/Application Support/Sublime Text 3/Packages"
-#   asprefs="$as/User/Preferences.sublime-settings"
-#   if [[ -d "$as" ]]; then
-#     for theme in $st/Theme*; do
-#       cp -r $theme $as
-#     done
-#     rm $asprefs
-#     cp -r $st/pm-themes $as
-#   else
-#     echo "Install Sublime Text http://www.sublimetext.com"
-#   fi
-
-
-
-# popd
 

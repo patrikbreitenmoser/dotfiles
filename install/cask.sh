@@ -16,8 +16,8 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 
 # # Then symlink your Dropbox directories back locally
-# $ ln -s ~/dotfiles/sublime-text-3/Packages/
-# $ ln -s ~/dotfiles/sublime-text-3/Installed\ Packages/
+# $ ln -s ~/sublime-text-3/Packages/
+# $ ln -s ~/sublime-text-3/Installed\ Packages/
 
 # brew cask install alfred
 # brew cask install onepassword

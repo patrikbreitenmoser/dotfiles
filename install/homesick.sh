@@ -6,3 +6,5 @@ homesick clone patrikbreitenmoser/dotfiles
 
 #symlink dotfiles
 homesick symlink dotfiles
+
+echo 'Homesick installed and dotfiles linked'

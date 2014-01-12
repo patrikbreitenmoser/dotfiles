@@ -1,0 +1,63 @@
+# show git branch/tag, or name-rev if on detached head
+parse_git_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
+
+parse_changes() {
+  if $(git remote | grep -iq 'origin') ;then
+    local git_where="$(parse_git_branch)"
+    behind=$(git log --oneline HEAD..origin/${git_where} 2>/dev/null | wc -l | tr -d " ")
+    ahead=$(git log --oneline origin/${git_where}..HEAD 2>/dev/null | wc -l | tr -d " ")
+    echo " $ZSH_THEME_PROMPT_AHEAD$ahead$ZSH_THEME_PROMPT_BEHIND$behind"
+  else
+    echo " $ZSH_THEME_PROMPT_AHEAD!$ZSH_THEME_PROMPT_BEHIND!"
+  fi
+}
+
+# show dirty or clean icon
+parse_git_dirty() {
+  if command git diff-index --quiet HEAD 2> /dev/null; then
+    echo "$ZSH_THEME_PROMPT_CLEAN"
+  else
+    echo "$ZSH_THEME_PROMPT_DIRTY"
+  fi
+}
+
+parse_svn_branch() {
+  if [[ -d .svn ]]; then
+    svn_info=$(svn info --xml 2>/dev/null)
+    svn_root=$(echo "${svn_info}" | grep "<root>" | sed 's/<[^>]*>//g')
+    svn_url=$(echo "${svn_info}" | grep "<url>"| sed 's/<[^>]*>//g')
+
+    branch_name="${${${svn_url#${svn_root}}#*/branches}[(ws:/:)1]}"
+    cur_path=$PWD
+
+    # go up until reaching the "master folder"
+    while ( [[ -d "${cur_path%/*}/.svn" ]] ) ; do
+      cur_path="${cur_path%/*}"
+    done
+
+    # dirty?
+    echo "$(parse_svn_dirty ${cur_path})$ZSH_THEME_SVN_PROMPT_PREFIX${branch_name}"
+  fi
+}
+
+# show dirty or clean icon
+parse_svn_dirty() {
+  s=$(svn status --ignore-externals $1 | grep -E '^\s*[ACDIM!?L]')
+  if [ $s ]; then
+    echo "$ZSH_THEME_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_PROMPT_CLEAN"
+  fi
+}
+
+# if in a git repo, show dirty indicator + git branch
+custom_status() {
+  local git_where="$(parse_git_branch)"
+  local svn_where="$(parse_svn_branch)"
+  [ -n "$git_where" ] && echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX${git_where}$(parse_changes)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  [ -n "$svn_where" ] && echo "${svn_where}$ZSH_THEME_SVN_PROMPT_SUFFIX"
+}

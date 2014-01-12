@@ -3,7 +3,7 @@ export LSCOLORS="Gxfxcxdxbxegedabagacad"
 setopt prompt_subst
 
 # include prompt functions
-source .prompt-functions
+source ~/dots/.prompt-functions
 
 # prompt constants
 ZSH_THEME_SVN_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}[svn:"

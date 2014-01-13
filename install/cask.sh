@@ -33,7 +33,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # brew cask install divvy
 # brew cask install daisydisk
 # brew cask install google-chrome-canary
-# brew cask install airmail-beta
 # brew cask install cleanmymac
 # brew cask install codebug
 # brew cask install hipchat

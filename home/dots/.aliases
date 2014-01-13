@@ -19,6 +19,7 @@ alias oo="open ."
 # Homesick Aliases
 alias hsp="homesick pull"
 alias hss="homesick symlink"
+alias hsp="homesick push"
 
 
 # Detect which `ls` flavor is in use

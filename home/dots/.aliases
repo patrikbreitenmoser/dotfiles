@@ -21,6 +21,14 @@ alias hsp="homesick pull"
 alias hss="homesick symlink"
 alias hsp="homesick push"
 
+# Jobs
+# Server Alias
+alias nerdy="ssh -o ServerAliveInterval=5 -o ServerAliveCountMax=1 patrikbreitenmoser@144.76.60.148"
+alias db1='ssh pbreitenmoser@db1'
+alias db3='ssh pbreitenmoser@db3'
+alias db4='ssh pbreitenmoser@db4'
+alias mgmt1='ssh pbreitenmoser@mgmt1'
+
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`

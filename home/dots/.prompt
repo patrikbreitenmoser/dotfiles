@@ -18,4 +18,4 @@ ZSH_THEME_PROMPT_BEHIND="↓"
 RPS1='$(custom_status) $EPS1'
 
 # basic prompt on the left
-PROMPT='%{$fg[cyan]%}%m: $fg[yellow]%~% %(?.%{$fg[green]%}.%{$fg[red]%}) %B→%b%{$reset_color%} '
+PROMPT='%{$fg[cyan]%}%m: %{$fg[yellow]%}%~% %(?.%{$fg[green]%}.%{$fg[red]%}) %B→%b%{$reset_color%} '
